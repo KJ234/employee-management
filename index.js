@@ -181,3 +181,70 @@ addAnotherDepartment = () => {
       });
     });
 };
+
+addRole = () => {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "role",
+        message: "What role title would you like to add?",
+        validate: (addRole) => {
+          if (addRole) {
+            return true;
+          } else {
+            console.log("Please enter a valid role");
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "salary",
+        message: "What is the salary of the role?",
+        validate: (addSalary) => {
+          if (isNaN(addSalary)) {
+            console.log("Please enter a valid salary (numbers only)");
+            return false;
+          } else {
+            return true;
+          }
+        },
+      },
+    ])
+    .then((answer) => {
+      const inputs = [answer.role, answer.salary];
+      const deptSql = `SELECT name, id FROM department`;
+
+      db.query(deptSql, (err, data) => {
+        if (err) throw err;
+
+        const deptartments = data.map(({ name, id }) => ({
+          name: name,
+          value: id,
+        }));
+
+        inquirer
+          .prompt([
+            {
+              type: "list",
+              name: "dept",
+              message: "What department is this role in?",
+              choices: deptartments,
+            },
+          ])
+          .then((choice) => {
+            const dept = choice.dept;
+            inputs.push(dept);
+            const sql = `INSERT INTO role (title, salary, department_id)
+              VALUES (?, ?, ?)`;
+
+            db.query(sql, inputs, (err, result) => {
+              if (err) throw err;
+              console.log(`Added ${answer.role} to roles!`);
+              showRoles();
+            });
+          });
+      });
+    });
+};
