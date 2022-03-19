@@ -1,7 +1,5 @@
 # employee-management
 
-# note-pad
-
 ## Table of Contents
 
 - Description
