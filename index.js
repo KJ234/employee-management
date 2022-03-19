@@ -328,7 +328,7 @@ addEmployee = () => {
                     if (err) throw err;
                     console.log("Employee has been added!");
 
-                    showEmployees();
+                    showAllEmployees();
                   });
                 });
             });
@@ -383,7 +383,7 @@ updateRole = () => {
               db.query(sql, params, (err, result) => {
                 if (err) throw err;
                 console.log("Employee has been updated!");
-                showEmployees();
+                showAllEmployees();
               });
             });
         });
@@ -438,7 +438,7 @@ updateManager = () => {
               db.query(sql, params, (err, data) => {
                 if (err) throw err;
                 console.log("Employee has been updated!");
-                showEmployees();
+                showAllEmployees();
               });
             });
         });
@@ -555,7 +555,7 @@ deleteEmployee = () => {
           if (err) throw err;
           console.log("Successfully Deleted!");
 
-          showEmployees();
+          showAllEmployees();
         });
       });
   });
