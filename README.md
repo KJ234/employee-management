@@ -22,6 +22,9 @@ A user can clone this from my repository, but they will need to install node in 
 
 ## Usage
 
+https://user-images.githubusercontent.com/95283510/159136333-891ca803-ef81-4f0a-9874-127839fb7aa2.mp4
+
+
 ## Credits
 
 No other collaborators for this project
