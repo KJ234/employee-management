@@ -110,3 +110,22 @@ showDepartments = () => {
     startInquirer();
   });
 };
+
+//Show Roles
+showRoles = () => {
+  const sql = `SELECT 
+    role.id,
+    role.title,
+    role.salary,
+    department.name AS department
+    FROM
+    role
+    INNER JOIN department ON role.department_id = department.id
+    `;
+
+  db.query(sql, (err, rows) => {
+    if (err) throw err;
+    console.table(rows);
+    startInquirer();
+  });
+};
